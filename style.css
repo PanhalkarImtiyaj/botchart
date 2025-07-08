@@ -1,0 +1,198 @@
+ :root {
+      --user-color: #10a37f;
+      --bot-color: #444654;
+      --bg-color: #343541;
+      --input-bg: #40414f;
+      --text-color: #ececf1;
+      --highlight: #6e6eff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      line-height: 1.6;
+    }
+
+    .header {
+      padding: 15px 20px;
+      background-color: var(--input-bg);
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #555;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      max-width: 85%;
+      padding: 12px 18px;
+      margin: 8px 0;
+      border-radius: 18px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      animation: fadeIn 0.3s ease-out;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .user {
+      align-self: flex-end;
+      background-color: var(--user-color);
+      border-bottom-right-radius: 4px;
+      color: white;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background-color: var(--bot-color);
+      border-bottom-left-radius: 4px;
+    }
+
+    .typing-indicator {
+      display: inline-block;
+      padding: 12px 18px;
+      background-color: var(--bot-color);
+      border-radius: 18px;
+      align-self: flex-start;
+      margin: 8px 0;
+      border-bottom-left-radius: 4px;
+    }
+
+    .typing-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #ccc;
+      margin: 0 2px;
+      animation: typingAnimation 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingAnimation {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+
+    .input-area {
+      display: flex;
+      padding: 15px;
+      background-color: var(--input-bg);
+      border-top: 1px solid #555;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 12px 18px;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      background-color: #2f2f3c;
+      color: white;
+      outline: none;
+      transition: box-shadow 0.3s;
+    }
+
+    .input-area input:focus {
+      box-shadow: 0 0 0 2px var(--highlight);
+    }
+
+    .input-area button {
+      margin-left: 12px;
+      background-color: var(--user-color);
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .input-area button:hover {
+      background-color: #0d8a6d;
+      transform: translateY(-1px);
+    }
+
+    .input-area button:active {
+      transform: translateY(0);
+    }
+
+    .timestamp {
+      font-size: 0.7rem;
+      opacity: 0.7;
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    .suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 10px 20px;
+      background-color: var(--input-bg);
+      border-top: 1px solid #555;
+    }
+
+    .suggestion-chip {
+      background-color: #2f2f3c;
+      border-radius: 16px;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .suggestion-chip:hover {
+      background-color: var(--user-color);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 600px) {
+      .message {
+        max-width: 90%;
+        padding: 10px 15px;
+      }
+      
+      .header h1 {
+        font-size: 1.1rem;
+      }
+    }
